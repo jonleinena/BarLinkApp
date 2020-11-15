@@ -13,12 +13,12 @@ import com.example.barlink.database.DBManager;
 import com.example.barlink.establishment.Establishment;
 
 public class Register extends AppCompatActivity {
+    private DBManager dbManager;
     EditText nameInput;
     EditText addressInput;
     EditText nifInput;
     EditText phoneInput;
     EditText emailInput;
-
     String name, address, nif, email;
     int phone;
     Button button;
@@ -28,11 +28,11 @@ public class Register extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-
+        dbManager = DBManager.getInstance(this);
         nameInput = (EditText) findViewById(R.id.nameInput);
         addressInput = (EditText) findViewById(R.id.addressInput);
         nifInput = (EditText) findViewById(R.id.nifInput);
-        phoneInput = (EditText) findViewById(R.id.telephoneInput);
+        phoneInput = (EditText) findViewById(R.id.phoneInput);
         emailInput = (EditText) findViewById(R.id.emailInput);
         button = (Button) findViewById(R.id.submitButton);
         button.setOnClickListener(new View.OnClickListener() {
@@ -46,7 +46,7 @@ public class Register extends AppCompatActivity {
 
                 showToast("Successful registration");
                 Establishment est = new Establishment(name, address, phone, nif, email);
-                DBManager.InsertEstablishment(est);
+                dbManager.saveEstablishment(est);
             }
         });
     }

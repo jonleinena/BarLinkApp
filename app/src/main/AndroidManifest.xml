@@ -10,9 +10,9 @@
         android:supportsRtl="true"
         android:screenOrientation="landscape"
         android:theme="@style/Theme.Barlink">
-        <activity android:name=".utils.Activity2"></activity>
+        <activity android:name=".utils.MainActivity"></activity>
         <activity android:name=".utils.Register" />
-        <activity android:name=".utils.MainActivity">
+        <activity android:name=".utils.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

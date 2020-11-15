@@ -1,157 +1,146 @@
 package com.example.barlink.database;
 
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 
 import com.example.barlink.command.User;
 import com.example.barlink.establishment.Establishment;
-import com.example.barlink.products.Product;
-import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 
-import java.sql.Connection;
-import java.sql.Driver;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 
-import android.content.Context;
-import android.util.Log;
+public class DBManager extends SQLiteOpenHelper {
 
-import androidx.room.Database;
+    public static final int DATABASE_VERSION = 1;
+    public static final String DATABASE_NAME = "BarLink.db";
+    private static DBManager sInstance;
 
-/**
- * @author github.com/jonleinena
- * @author github.com/FerreMikel
- */
+    public static synchronized DBManager getInstance(Context context) {
+        if (sInstance == null) {
+            sInstance = new DBManager(context.getApplicationContext());
+        }
+        return sInstance;
+    }
 
-public class DBManager extends SQLiteAssetHelper {
-
-    public static String DATABASE_NAME = "BarLinkPrueba.db";
-    private static final int DATABASE_VERSION = 1;
-
-    public static Connection conn = null;
-    public static String url = "jdbc:sqldroid:/data/data/com.example.barlink/databases/BarLinkPrueba.db";
-
-    public DBManager(Context context) {
+    private DBManager(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
-    /**
-     * Static method to start the connection to the database
-     * @param context
-     */
-    public static void startConnection(Context context) {
-        try {
-            new DBManager(context).getReadableDatabase();
-            DriverManager.registerDriver((Driver) Class.forName("org.sqldroid.SQLDroidDriver").newInstance());
-            conn = DriverManager.getConnection(url);
-            Log.w("myApp", "Conexion satisfactoria");
-
-        } catch (SQLException | ClassNotFoundException e) {
-            Log.w("SportTogether", e.getMessage());
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        }
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+        db.execSQL("CREATE TABLE ESTABLISHMENT (" +
+                "id INTEGER NOT NULL DEFAULT 'id=1' CHECK(id=1) PRIMARY KEY, " +
+                "name TEXT NOT NULL, " +
+                "nif TEXT NOT NULL CHECK(length(NIF)=9), " +
+                "email TEXT NOT NULL, " +
+                "phone INTEGER NOT NULL, " +
+                "address TEXT NOT NULL" +
+                ")");
+        db.execSQL("CREATE TABLE USER (" +
+                "idUser INTEGER NOT NULL PRIMARY KEY, " +
+                "name TEXT NOT NULL, " +
+                "type TEXT NOT NULL" +
+                ")");
+        db.execSQL("CREATE TABLE ZONE(" +
+                "idZone integer NOT NULL," +
+                "name text NOT NULL," +
+                "capacity real NOT NULL" +
+                ")");
+        db.execSQL("CREATE TABLE TABLE_DB (" +
+                "idTable integer NOT NULL," +
+                "idZone integer NOT NULL," +
+                "tableCapacity real NOT NULL," +
+                "FOREIGN KEY(idZone) REFERENCES ZONE(idZone)," +
+                "PRIMARY KEY(idTable, idZone)" +
+                ")");
+        db.execSQL("CREATE TABLE PRODUCT_CATEGORY (" +
+                "idCategory integer PRIMARY KEY," +
+                "name text NOT NULL" +
+                ")");
+        db.execSQL("CREATE TABLE MENU_PRODUCT (" +
+                "idProduct integer," +
+                "idCategory integer NOT NULL," +
+                "idCommand integer NOT NULL," +
+                "name text NOT NULL," +
+                "price real NOT NULL," +
+                "description ingredients NOT NULL," +
+                "imagePath text NOT NULL," +
+                "FOREIGN KEY(idCategory) REFERENCES PRODUCT_CATEGORY(idCategory)," +
+                "FOREIGN KEY(idCommand) REFERENCES COMMAND(idCommand)," +
+                "PRIMARY KEY(idProduct, idCategory)" +
+                ")");
+        db.execSQL("CREATE TABLE COMMAND (" +
+                "idCommand integer NOT NULL," +
+                "idTable integer NOT NULL," +
+                "idProduct integer NOT NULL," +
+                "idUser integer NOT NULL," +
+                "hour DATETIME NOT NULL," +
+                "FOREIGN KEY(idTable) REFERENCES TABLE_DB(idTable)," +
+                "FOREIGN KEY(idProduct) REFERENCES PRODUCT(idProduct)," +
+                "FOREIGN KEY(idUser) REFERENCES USER(idUser)," +
+                "PRIMARY KEY(idCommand, idTable, idProduct, idUser)" +
+                ")");
+        db.execSQL("CREATE TABLE RECEIPT (" +
+                "idReceipt integer NOT NULL," +
+                "idCommand integer NOT NULL," +
+                "hour DATETIME NOT NULL," +
+                "price real," +
+                "FOREIGN KEY(idCommand) REFERENCES COMMAND(idCommand)," +
+                "PRIMARY KEY(idReceipt, idCommand)" +
+                ")");
+        db.execSQL("CREATE TABLE WAREHOUSE_CATEGORY (" +
+                "idWCategory integer NOT NULL PRIMARY KEY," +
+                "name text NOT NULL" +
+                ")");
+        db.execSQL("CREATE TABLE WAREHOUSE_PRODUCT (" +
+                "idWProduct integer NOT NULL," +
+                "idWCategory integer NOT NULL," +
+                "name text NOT NULL," +
+                "amount integer NOT NULL," +
+                "minimumAmount integer NOT NULL," +
+                "FOREIGN KEY(idWCategory) REFERENCES WAREHOUSE_CATEGORY(idWCategory)," +
+                "PRIMARY KEY(idWProduct, idWCategory)" +
+                ")");
+        db.execSQL("CREATE TABLE COMMAND_PRODUCT (" +
+                "idCommand INTEGER NOT NULL," +
+                "idProduct INTEGER NOT NULL," +
+                "PRIMARY KEY(idCommand, idProduct)," +
+                "FOREIGN KEY(idCommand) REFERENCES COMMAND(idCommand) ON DELETE CASCADE," +
+                "FOREIGN KEY(idProduct) REFERENCES MENU_PRODUCT(idProduct) ON DELETE CASCADE" +
+                ");");
     }
 
-    /**
-     * Static method to end the connection to the database
-     */
-    public static void endConnection(){
-        try {
-            conn.close();
-            System.out.println("Connection to SQLite has been ended.");
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {}
 
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            System.out.println(e.getMessage());
-        }
-    }
-
-    /**
-     * Method to insert establihsment instance into database. Only executed the first time the programme is run.
-     * @param est instance of etablishment.
-     */
-    public static void InsertEstablishment(Establishment est){
-        String sql = "INSERT INTO ESTABLISHMENT(NAME, NIF, EMAIL, TELEPHONE, ADRESS) VALUES(?,?,?,?,?)";
-
-        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, est.getName());
-            pstmt.setString(2, est.getNif());
-            pstmt.setString(3, est.getEmail());
-            pstmt.setInt(4, est.getPhone());
-            pstmt.setString(5, est.getAddress());
-            pstmt.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-
-    /**
-     * Method to check whether there is any establishment registered.
-     * @return whether there is any estblishment
-     */
-    public static boolean checkEstablishment(){
-        String sql = "SELECT * FROM ESTABLISHMENT";
-        try (Statement stmt = conn.createStatement()) {
-            ResultSet rs = stmt.executeQuery(sql);
-
-            if(rs.isBeforeFirst()) {
-                return true;
-            }return false;
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-            return false;
-        }
-
-
-
-    }
-
-    /**
-     * Method to insert products into the database, getting the data from the product instance
-     * @param p product instance
-     * @param description product description
-     */
-    public static void insertProduct(Product p, String description){
-        String sql = "INSERT INTO MENU_PRODUCT(idProduct, idCategory, name, price, description, imagepath) VALUES(?,?,?,?,?,?)";
-
-        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, p.getIdProduct());
-            pstmt.setInt(2, p.getIdProduct());
-            pstmt.setString(3, p.getName());
-            pstmt.setFloat(4, p.getPrice());
-            pstmt.setString(5, description);
-            pstmt.setString(6, p.getImg());
-            pstmt.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-    /**
-     * Static method to select all the user from the database
-     * @return ArrayList with instances of Users, created with data from the database
-     */
-    public static ArrayList<User> readUsers(){
+    public ArrayList<User> getUsers() {
         ArrayList<User> list = new ArrayList<>();
         String sql = "SELECT * FROM USER";
-        try {
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(sql);
-
-            while(rs.next()){
-                list.add(new User(rs.getString("name"),rs.getInt("idUser"), rs.getString("type")));
-            }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor res = db.rawQuery(sql, null);
+        while (res.moveToNext()) {
+            list.add(new User(res.getString(res.getColumnIndex("id")), res.getInt(res.getColumnIndex("idUser")), res.getString(res.getColumnIndex("type"))));
         }
         return list;
     }
 
+    public Boolean checkEstablishment() {
+        String sql = "SELECT * FROM ESTABLISHMENT";
+        Cursor res = getReadableDatabase().rawQuery(sql, null);
+        return res.moveToFirst();
+    }
+
+    public void saveEstablishment(Establishment establishment) {
+        ContentValues values = new ContentValues();
+        values.put("name", establishment.getName());
+        values.put("nif", establishment.getNif());
+        values.put("email", establishment.getEmail());
+        values.put("phone", establishment.getPhone());
+        values.put("address", establishment.getAddress());
+
+        getWritableDatabase().insert("ESTABLISHMENT", null, values);
+    }
 
 }
