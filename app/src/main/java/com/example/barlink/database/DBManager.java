@@ -121,7 +121,7 @@ public class DBManager extends SQLiteOpenHelper {
         SQLiteDatabase db = getReadableDatabase();
         Cursor res = db.rawQuery(sql, null);
         while (res.moveToNext()) {
-            list.add(new User(res.getString(res.getColumnIndex("id")), res.getInt(res.getColumnIndex("idUser")), res.getString(res.getColumnIndex("type"))));
+            list.add(new User(res.getString(res.getColumnIndex("name")), res.getInt(res.getColumnIndex("idUser")), res.getString(res.getColumnIndex("type"))));
         }
         return list;
     }
@@ -141,6 +141,20 @@ public class DBManager extends SQLiteOpenHelper {
         values.put("address", establishment.getAddress());
 
         getWritableDatabase().insert("ESTABLISHMENT", null, values);
+    }
+
+    public void saveUser(User user){
+        ContentValues values = new ContentValues();
+        values.put("idUser", user.getIdEmployee());
+        values.put("name", user.getName());
+        values.put("type", user.getTypeEmployee());
+
+        getWritableDatabase().insert("USER", null, values);
+    }
+
+    public void selectUser(int iduser){
+        String sql = "SELECT * FROM USER WHERE idUser = ?";
+
     }
 
 }

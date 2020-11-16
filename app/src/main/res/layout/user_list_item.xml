@@ -1,50 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    app:cardElevation="10dp"
+    app:cardCornerRadius="25dp"
+    android:layout_margin="10dp">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="6dp">
 
-    <TextView
-        android:id="@+id/username"
-        android:layout_width="265dp"
-        android:layout_height="61dp"
-        android:layout_marginTop="112dp"
-        android:fontFamily="@font/poppins_medium"
-        android:text="Nombreusuario"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/userId"
-        app:layout_constraintEnd_toStartOf="@+id/userType"
-        app:layout_constraintHorizontal_bias="0.566"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                app:srcCompat="@drawable/ic_face_black"
+                tools:ignore="VectorDrawableCompat"></ImageView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:padding="4dp"
+                android:orientation="vertical"
+                android:layout_toEndOf="@+id/image"
+                android:layout_toRightOf="@id/image"
+                android:layout_marginLeft="2dp">
 
-    <TextView
-        android:id="@+id/userType"
-        android:layout_width="265dp"
-        android:layout_height="61dp"
-        android:layout_marginEnd="636dp"
-        android:layout_marginRight="636dp"
-        android:fontFamily="@font/poppins_medium"
-        android:text="tipoUsuario"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.618" />
+                <TextView
+                    android:id="@+id/username"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_medium"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/userId"
-        android:layout_width="265dp"
-        android:layout_height="61dp"
-        android:layout_marginBottom="8dp"
-        android:fontFamily="@font/poppins"
-        android:text="ID: 00000"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.064"
-        app:layout_constraintStart_toStartOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/userId"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/userType"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+        </RelativeLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
