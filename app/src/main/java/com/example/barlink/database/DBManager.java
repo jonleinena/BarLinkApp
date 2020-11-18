@@ -8,8 +8,13 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.example.barlink.command.User;
 import com.example.barlink.establishment.Establishment;
+import com.example.barlink.establishment.Table;
+import com.example.barlink.establishment.Zone;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 public class DBManager extends SQLiteOpenHelper {
 
@@ -45,7 +50,7 @@ public class DBManager extends SQLiteOpenHelper {
                 ")");
         db.execSQL("CREATE TABLE ZONE(" +
                 "idZone integer NOT NULL," +
-                "name text NOT NULL," +
+                "name TEXT, "+
                 "capacity real NOT NULL" +
                 ")");
         db.execSQL("CREATE TABLE TABLE_DB (" +
@@ -152,9 +157,48 @@ public class DBManager extends SQLiteOpenHelper {
         getWritableDatabase().insert("USER", null, values);
     }
 
-    public void selectUser(int iduser){
+    public User selectUser(int iduser){
         String sql = "SELECT * FROM USER WHERE idUser = ?";
-
+        String[] args = new String[1];
+        args[0] = iduser+"";
+        Cursor res = getReadableDatabase().rawQuery(sql,args);
+        res.moveToFirst();
+        User user = new User(res.getString(res.getColumnIndex("name")), res.getInt(res.getColumnIndex("idUser")), res.getString(res.getColumnIndex("type")));
+        return user;
     }
+
+    public HashMap<Integer, Table[]> getZoneCapacity(){
+        HashMap<Integer, Table[]> capacities = new HashMap<>();
+        String sql = "SELECT ?, ? FROM ZONE ";
+        String[] args = new String[2];
+        args[0] = "idZone";
+        args[1] = "capacity";
+        Cursor res = getReadableDatabase().rawQuery(sql, args);
+        while(res.moveToNext()){
+            capacities.put((Integer)res.getInt(res.getColumnIndex("idZone")), new Table[res.getInt(res.getColumnIndex("capacity"))]);
+        }
+        return capacities;
+    }
+
+    public ArrayList<Table> getTables(){
+        ArrayList<Table> tables = new ArrayList<>();
+        String sql = "SELECT * FROM TABLE_DB";
+        Cursor res = getReadableDatabase().rawQuery(sql, null);
+        while(res.moveToNext()){
+            tables.add(new Table(res.getInt(res.getColumnIndex("idZone")), res.getInt(res.getColumnIndex("capacity"))));
+        }
+        return tables;
+    }
+
+    public void saveZone(Zone zone){
+        ContentValues values = new ContentValues();
+        values.put("idZone", zone.getIdZone());
+        values.put("name","");
+        values.put("capacity", zone.getCapacity());
+        getWritableDatabase().insert("ZONE", null, values);
+    }
+
+
+
 
 }

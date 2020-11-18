@@ -11,7 +11,8 @@ import java.util.ArrayList;
 public class Zone {
 
     int idZone;
-    ArrayList<Table> tables;
+    Table[] tables;
+    int capacity;
 
     /**
      * Empty constructor
@@ -19,17 +20,31 @@ public class Zone {
     public Zone() {
         idZone = 0;
         tables = null;
+        capacity = 0;
+    }
+
+    /**
+     * Constructor based on id an capacity alone. tables is set to null
+     * @param idZone zone's unique identifier
+     * @param capacity zone's capacity
+     */
+    public Zone(int idZone, int capacity) {
+        this.idZone = idZone;
+        tables = null;
+        this.capacity = capacity;
     }
 
     /**
      * Zone class constructor
      *
-     * @param idZone
-     * @param tables
+     * @param idZone zone identifier
+     * @param tables array of tables
+     * @param capacity capacity of the zone, to determine how many tables fit.
      */
-    public Zone(int idZone, ArrayList<Table> tables) {
+    public Zone(int idZone, Table[] tables, int capacity) {
         this.idZone = idZone;
         this.tables = tables;
+        this.capacity = capacity;
     }
 
     public int getIdZone() {
@@ -40,12 +55,20 @@ public class Zone {
         this.idZone = idZone;
     }
 
-    public ArrayList<Table> getTables() {
+    public Table[] getTables() {
         return tables;
     }
 
-    public void setTables(ArrayList<Table> tables) {
+    public void setTables(Table[] tables) {
         this.tables = tables;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
     }
 
     /**
@@ -53,8 +76,8 @@ public class Zone {
      *
      * @param table Table class object, the table to be added to the zone
      */
-    public void addTable(Table table) {
-        this.tables.add(table);
+    public void addTable(Table table, int position) {
+        tables[position] = table;
     }
 
     /**
@@ -62,7 +85,7 @@ public class Zone {
      *
      * @param table Table class object, the table to be removed from the zone
      */
-    public void removeTable(Table table) {
-        this.tables.remove(table);
+    public void removeTable(Table table, int position) {
+        tables[position] = null;
     }
 }

@@ -12,7 +12,7 @@
         android:screenOrientation="landscape"
         android:supportsRtl="true"
         android:theme="@style/Theme.Barlink">
-        <activity android:name=".utils.Tables"></activity>
+        <activity android:name=".utils.Zones"></activity>
         <activity android:name=".utils.MainActivity" />
         <activity android:name=".utils.Register" />
         <activity android:name=".utils.WelcomeActivity">

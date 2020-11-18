@@ -10,17 +10,17 @@
         android:id="@+id/nameInput2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="316dp"
         android:ems="10"
         android:fontFamily="@font/poppins_medium"
+        android:gravity="start"
         android:hint="Name"
         android:inputType="text"
         android:textAlignment="viewStart"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toEndOf="@+id/users_reciclerview"
+        app:layout_constraintStart_toEndOf="@+id/zone_recyclerview"
         app:layout_constraintTop_toTopOf="parent"
-        android:gravity="start" />
+        app:layout_constraintVertical_bias="0.42" />
 
     <EditText
         android:id="@+id/idInput"
@@ -29,14 +29,15 @@
         android:layout_marginTop="36dp"
         android:ems="10"
         android:fontFamily="@font/poppins_medium"
+        android:gravity="start"
         android:hint="Employee ID"
-        android:inputType="text"
+        android:inputType="number"
         android:textAlignment="viewStart"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toEndOf="@+id/users_reciclerview"
+        app:layout_constraintStart_toEndOf="@+id/zone_recyclerview"
         app:layout_constraintTop_toBottomOf="@+id/nameInput2"
-        android:gravity="start" />
+        app:layout_constraintVertical_bias="0.002" />
 
     <TextView
         android:id="@+id/textView"
@@ -53,7 +54,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/users_reciclerview"
+        android:id="@+id/zone_recyclerview"
         android:layout_width="600dp"
         android:layout_height="400dp"
         android:layout_marginTop="60dp"
@@ -74,7 +75,7 @@
         app:cornerRadius="100dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/users_reciclerview"
+        app:layout_constraintStart_toEndOf="@+id/zone_recyclerview"
         app:layout_constraintTop_toBottomOf="@+id/spinner"
         app:layout_constraintVertical_bias="0.343" />
 
@@ -85,8 +86,11 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="4dp"
         android:layout_marginRight="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/users_reciclerview"
-        app:layout_constraintTop_toBottomOf="@+id/idInput" />
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintStart_toEndOf="@+id/zone_recyclerview"
+        app:layout_constraintTop_toBottomOf="@+id/idInput"
+        app:layout_constraintVertical_bias="0.014" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

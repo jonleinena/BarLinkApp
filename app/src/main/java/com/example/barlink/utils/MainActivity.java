@@ -1,24 +1,17 @@
 package com.example.barlink.utils;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.barlink.R;
@@ -44,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_2);
         dbManager = DBManager.getInstance(this);
-        recyclerView = (RecyclerView) findViewById(R.id.users_reciclerview);
+        recyclerView = (RecyclerView) findViewById(R.id.zone_recyclerview);
         users = new ArrayList<>();
         users = dbManager.getUsers();
         createAdapter();
@@ -123,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void openNextActivity(User user){
-        Intent intent = new Intent(this, Tables.class);
+        Intent intent = new Intent(this, Zones.class);
         intent.putExtra("selectedUser", user.getIdEmployee());
         startActivity(intent);
     }
