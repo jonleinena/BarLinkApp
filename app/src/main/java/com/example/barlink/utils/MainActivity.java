@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.example.barlink.R;
 import com.example.barlink.command.User;
 import com.example.barlink.database.DBManager;
+import com.example.barlink.utils.adapters.FirstAdapter;
 
 import java.util.ArrayList;
 
@@ -30,12 +31,16 @@ public class MainActivity extends AppCompatActivity {
     private Button button;
     private String name, selectedItem;
     private int userId;
-    private myAdapter adapter;
+    private FirstAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_2);
+        /**
+         * Get the database instance and initialize all the global variables (textfields, button, recyclerview, etc.)
+         * Create thee recyclerview adapter and the spinner
+         */
         dbManager = DBManager.getInstance(this);
         recyclerView = (RecyclerView) findViewById(R.id.zone_recyclerview);
         users = new ArrayList<>();
@@ -47,7 +52,9 @@ public class MainActivity extends AppCompatActivity {
         idInput = (EditText) findViewById(R.id.idInput);
         button = (Button) findViewById(R.id.button);
 
-
+        /**
+         * When clicking the button the user is saved in teh database and the recyclerview updated
+         */
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,15 +71,21 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Method to create the recyclerview adapter.
+     */
     public void createAdapter(){
         // Create adapter passing in the sample user data
-        adapter = new myAdapter(users);
+        adapter = new FirstAdapter(users);
         // Attach the adapter to the recyclerview to populate items
         recyclerView.setAdapter(adapter);
         // Set layout manager to position the items
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         // That's all!
-        adapter.setOnItemClickListener(new myAdapter.OnItemClickListener() {
+        /**
+         * When selecting a user from the recyclerview the next activity is opened
+         */
+        adapter.setOnItemClickListener(new FirstAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
                User selectedUser =  users.get(position);
@@ -83,6 +96,9 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Method to create the Spinner
+     */
     public void createSpinner(){
         userTypeMenu = (Spinner) findViewById(R.id.spinner);
         String[] userTypes = new String[3];
@@ -107,14 +123,26 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Method to empty the textfields. Used once a user is saved
+     */
     public void emptyTextFields(){
         nameInput2.setText("");
         idInput.setText("");
     }
+
+    /**
+     * Methdo to show a toast with some text
+     * @param text text to show.
+     */
     private void showToast(String text) {
         Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * Method to open next activity
+     * @param user user selected, needed to pass the active user's id for following activities.
+     */
     private void openNextActivity(User user){
         Intent intent = new Intent(this, Zones.class);
         intent.putExtra("selectedUser", user.getIdEmployee());

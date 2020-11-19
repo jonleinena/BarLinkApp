@@ -1,38 +1,29 @@
-package com.example.barlink.utils;
+package com.example.barlink.utils.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.barlink.R;
-import com.example.barlink.command.User;
-import com.example.barlink.establishment.Zone;
+import com.example.barlink.establishment.Table;
 
-/**
- * this adapter is very similar to the adapters used for listview, except a ViewHolder is required
- * see http://developer.android.com/training/improving-layouts/smooth-scrolling.html
- * except instead having to implement a ViewHolder, it is implemented within the adapter.
- */
+import java.util.ArrayList;
 
-public class ZoneAdapter extends RecyclerView.Adapter<ZoneAdapter.ViewHolder> {
+public class TablesAdapter extends RecyclerView.Adapter<TablesAdapter.ViewHolder>{
 
-    private ArrayList<Zone> myList;
-    private OnItemClickListener mListener;
+    private ArrayList<Table> myList;
+    private TablesAdapter.OnItemClickListener mListener;
 
     public interface OnItemClickListener{
         void onItemClick(int position);
     }
 
-    public void setOnItemClickListener(OnItemClickListener listener){
+    public void setOnItemClickListener(TablesAdapter.OnItemClickListener listener){
         mListener = listener;
     }
 
@@ -41,12 +32,12 @@ public class ZoneAdapter extends RecyclerView.Adapter<ZoneAdapter.ViewHolder> {
     // you provide access to all the views for a data item in a view holder
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView zoneItemName;
+        public TextView tablesItemName;
 
 
-        public ViewHolder(View itemView, final OnItemClickListener listener) {
+        public ViewHolder(View itemView, final TablesAdapter.OnItemClickListener listener) {
             super(itemView);
-            zoneItemName = (TextView) itemView.findViewById(R.id.zoneItem);
+            tablesItemName = (TextView) itemView.findViewById(R.id.tableNumber);
 
 
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -64,7 +55,7 @@ public class ZoneAdapter extends RecyclerView.Adapter<ZoneAdapter.ViewHolder> {
     }
 
     //constructor
-    public ZoneAdapter(ArrayList<Zone> myList) {
+    public TablesAdapter(ArrayList<Table> myList) {
         this.myList = myList;
     }
 
@@ -75,7 +66,7 @@ public class ZoneAdapter extends RecyclerView.Adapter<ZoneAdapter.ViewHolder> {
         LayoutInflater inflater = LayoutInflater.from(context);
 
         // Inflate the custom layout
-        View matchesView = inflater.inflate(R.layout.zone_list_item, parent, false);
+        View matchesView = inflater.inflate(R.layout.rounded_table, parent, false);
 
         // Return a new holder instance
         ViewHolder viewHolder = new ViewHolder(matchesView, mListener);
@@ -86,15 +77,17 @@ public class ZoneAdapter extends RecyclerView.Adapter<ZoneAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int i) {
         // Get the data model based on position
-        Zone zone = myList.get(i);
+        Table table = myList.get(i);
 
 
         // Set item views based on your views and data model
-        TextView zoneItem = viewHolder.zoneItemName;
-        zoneItem.setText("Zone nº"+zone.getIdZone());
-
+        TextView tableItem = viewHolder.tablesItemName;
+        tableItem.setText(table.getIdTable()+"");
 
     }
+
+
+
 
     // Return the size of your dataset (invoked by the layout manager)
     @Override

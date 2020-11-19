@@ -1,4 +1,4 @@
-package com.example.barlink.utils;
+package com.example.barlink.utils.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 
@@ -21,7 +20,7 @@ import com.example.barlink.command.User;
  * except instead having to implement a ViewHolder, it is implemented within the adapter.
  */
 
-public class myAdapter extends RecyclerView.Adapter<myAdapter.ViewHolder> {
+public class FirstAdapter extends RecyclerView.Adapter<FirstAdapter.ViewHolder> {
 
     private List<User> myList;
     private OnItemClickListener mListener;
@@ -66,7 +65,7 @@ public class myAdapter extends RecyclerView.Adapter<myAdapter.ViewHolder> {
     }
 
     //constructor
-    public myAdapter(List<User> myList) {
+    public FirstAdapter(List<User> myList) {
         this.myList = myList;
     }
 

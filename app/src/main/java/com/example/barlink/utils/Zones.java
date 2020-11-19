@@ -12,18 +12,14 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.barlink.R;
-import com.example.barlink.command.User;
 import com.example.barlink.database.DBManager;
-import com.example.barlink.establishment.Table;
 import com.example.barlink.establishment.Zone;
+import com.example.barlink.utils.adapters.ZoneAdapter;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
 
 public class Zones extends AppCompatActivity {
-    private User user;
+    private int idUser;
     private DBManager dbManager;
     private ZoneAdapter adapter;
     private ArrayList<Zone> zoneList;
@@ -37,6 +33,7 @@ public class Zones extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_zones);
+        getUser();
         dbManager = DBManager.getInstance(this);
         recyclerView = (RecyclerView) findViewById(R.id.zone_recyclerview);
         zoneList = new ArrayList<>();
@@ -81,8 +78,8 @@ public class Zones extends AppCompatActivity {
         adapter.setOnItemClickListener(new ZoneAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-             //   User selectedUser =  zoneList.get(position);
-               // openNextActivity(selectedUser);
+               Zone selectedZone =  zoneList.get(position);
+               openNextActivity(idUser, selectedZone.getIdZone());
 
             }
         });
@@ -94,8 +91,8 @@ public class Zones extends AppCompatActivity {
      */
     public void getUser(){
         Intent intent = getIntent();
-        int u = intent.getIntExtra("selectedUser", 0);
-        user = dbManager.selectUser(u);
+        idUser = intent.getIntExtra("selectedUser", 0);
+
     }
 
 
@@ -104,7 +101,12 @@ public class Zones extends AppCompatActivity {
         zoneNameET.setText("");
     }
 
-
+    public void openNextActivity(int idUser, int idZone){
+        Intent intent = new Intent(this, Tables.class);
+        intent.putExtra("selectedUser", idUser);
+        intent.putExtra("selectedZone", idZone);
+        startActivity(intent);
+    }
 
 
 }

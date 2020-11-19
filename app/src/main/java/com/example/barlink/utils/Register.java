@@ -29,6 +29,7 @@ public class Register extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        //Get instance of the database and initialize all the text fields and buttons
         dbManager = DBManager.getInstance(this);
         nameInput = (EditText) findViewById(R.id.nameInput);
         addressInput = (EditText) findViewById(R.id.addressInput);
@@ -36,9 +37,13 @@ public class Register extends AppCompatActivity {
         phoneInput = (EditText) findViewById(R.id.phoneInput);
         emailInput = (EditText) findViewById(R.id.emailInput);
         button = (Button) findViewById(R.id.submitButton);
+        /**
+         * When the button is clicked, the establishment instance created eith the textflieds data is saved in the database and the next activity opens.
+         */
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Create the establishment instance out of the text fields' data
                 name = nameInput.getText().toString();
                 address = addressInput.getText().toString();
                 nif = nifInput.getText().toString();
@@ -47,15 +52,25 @@ public class Register extends AppCompatActivity {
 
                 showToast("Successful registration");
                 Establishment est = new Establishment(name, address, phone, nif, email);
+                //Save establishment in the database
                 dbManager.saveEstablishment(est);
+                //Open next activity
                 openActivity2();
             }
         });
     }
 
+    /**
+     * Method to show a simple toast
+     * @param text String text to show on the toast
+     */
     private void showToast(String text) {
         Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
     }
+
+    /**
+     * Method to open the next activity
+     */
     private void openActivity2(){
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);

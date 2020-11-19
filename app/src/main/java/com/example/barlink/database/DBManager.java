@@ -16,12 +16,21 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+/**claass to manage all the access to the database
+ * @author github.com/jonleinena
+ * @author github.com/FerreMikel
+ */
 public class DBManager extends SQLiteOpenHelper {
 
     public static final int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "BarLink.db";
     private static DBManager sInstance;
 
+    /**
+     *static method to get the instance of the class that has been previously created, to avoid creating a new one.
+     * @param context context of the app
+     * @return the instance of the class
+     */
     public static synchronized DBManager getInstance(Context context) {
         if (sInstance == null) {
             sInstance = new DBManager(context.getApplicationContext());
@@ -29,10 +38,18 @@ public class DBManager extends SQLiteOpenHelper {
         return sInstance;
     }
 
+    /**
+     * Constructor of the class
+     * @param context context of the app
+     */
     private DBManager(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
+    /**
+     * Always executes the create table statements in the onCreate Bundle, in case they are not created yet.
+     * @param db database
+     */
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE ESTABLISHMENT (" +
@@ -119,6 +136,10 @@ public class DBManager extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {}
 
+    /**
+     * Method to get the users form the database
+     * @return ArrayList with all of the user objects
+     */
     public ArrayList<User> getUsers() {
         ArrayList<User> list = new ArrayList<>();
         String sql = "SELECT * FROM USER";
@@ -130,12 +151,21 @@ public class DBManager extends SQLiteOpenHelper {
         return list;
     }
 
+    /**
+     * Method to check whether a establishment has been introduced to the database or not.
+     * If it is the first time executing the app, the establishment will be registered, but just that time.
+     * @return
+     */
     public Boolean checkEstablishment() {
         String sql = "SELECT * FROM ESTABLISHMENT";
         Cursor res = getReadableDatabase().rawQuery(sql, null);
         return res.moveToFirst();
     }
 
+    /**
+     * Method to save the esablishment in the database
+     * @param establishment Establishment object, instanced with the user's data
+     */
     public void saveEstablishment(Establishment establishment) {
         ContentValues values = new ContentValues();
         values.put("name", establishment.getName());
@@ -147,6 +177,10 @@ public class DBManager extends SQLiteOpenHelper {
         getWritableDatabase().insert("ESTABLISHMENT", null, values);
     }
 
+    /**
+     * Method to save the user in the database
+     * @param user user object, instanced with the app's user's input.
+     */
     public void saveUser(User user){
         ContentValues values = new ContentValues();
         values.put("idUser", user.getIdEmployee());
@@ -156,6 +190,11 @@ public class DBManager extends SQLiteOpenHelper {
         getWritableDatabase().insert("USER", null, values);
     }
 
+    /**
+     * Method to select a user out of their ID
+     * @param iduser int, the ID of the user we want the info about
+     * @return user object, instanced with the database data.
+     */
     public User selectUser(int iduser){
         String sql = "SELECT * FROM USER WHERE idUser = ?";
         String[] args = new String[1];
@@ -166,6 +205,10 @@ public class DBManager extends SQLiteOpenHelper {
         return user;
     }
 
+    /**
+     * Method to select the zones of the database
+     * @return arrayList of zone instances
+     */
     public ArrayList<Zone> getZones() {
         String sql = "SELECT * FROM ZONE";
         Cursor res = getReadableDatabase().rawQuery(sql, null);
@@ -176,12 +219,22 @@ public class DBManager extends SQLiteOpenHelper {
         return zones;
     }
 
+    /**
+     * Method to save a zone in the database
+     * @param zone zone object to be saved
+     */
     public void saveZone(Zone zone){
         ContentValues values = new ContentValues();
         values.put("idZone", zone.getIdZone());
         values.put("name", zone.getName());
         getWritableDatabase().insert("ZONE", null, values);
     }
+
+    /**
+     * Method to get all the tables in a zone
+     * @param idZone the ID of the zone where the tables are located
+     * @return arrayList with table instances.
+     */
     public ArrayList<Table> getTablesByZone(int idZone) {
         String sql = "SELECT * FROM TABLE_DB WHERE idZone = ?";
         String[] args = new String[1];
