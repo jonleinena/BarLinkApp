@@ -2,6 +2,7 @@ package com.example.barlink.utils;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -47,11 +48,16 @@ public class Register extends AppCompatActivity {
                 showToast("Successful registration");
                 Establishment est = new Establishment(name, address, phone, nif, email);
                 dbManager.saveEstablishment(est);
+                openActivity2();
             }
         });
     }
 
     private void showToast(String text) {
         Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
+    }
+    private void openActivity2(){
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 }
