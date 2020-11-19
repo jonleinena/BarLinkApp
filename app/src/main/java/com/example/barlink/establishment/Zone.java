@@ -11,26 +11,27 @@ import java.util.ArrayList;
 public class Zone {
 
     int idZone;
-    ArrayList<Table> tables;
+    String name;
 
     /**
      * Empty constructor
      */
     public Zone() {
         idZone = 0;
-        tables = null;
+        name = "";
     }
 
     /**
-     * Zone class constructor
+     * Constructor based on id an capacity alone. tables is set to null
      *
-     * @param idZone
-     * @param tables
+     * @param idZone   zone's unique identifier
+     * @param name     zone's capacity
      */
-    public Zone(int idZone, ArrayList<Table> tables) {
+    public Zone(int idZone, String name) {
         this.idZone = idZone;
-        this.tables = tables;
+        this.name = name;
     }
+
 
     public int getIdZone() {
         return idZone;
@@ -40,29 +41,12 @@ public class Zone {
         this.idZone = idZone;
     }
 
-    public ArrayList<Table> getTables() {
-        return tables;
+
+    public String getName() {
+        return name;
     }
 
-    public void setTables(ArrayList<Table> tables) {
-        this.tables = tables;
-    }
-
-    /**
-     * Method to add a table to the zone
-     *
-     * @param table Table class object, the table to be added to the zone
-     */
-    public void addTable(Table table) {
-        this.tables.add(table);
-    }
-
-    /**
-     * Method to remove a table from the zone
-     *
-     * @param table Table class object, the table to be removed from the zone
-     */
-    public void removeTable(Table table) {
-        this.tables.remove(table);
+    public void setName(String name) {
+        this.name = name;
     }
 }

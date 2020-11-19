@@ -9,6 +9,7 @@ package com.example.barlink.establishment;
 public class Table {
     int idTable;
     boolean booked;
+    int capacity;
 
     /**
      * Empty constructor
@@ -16,16 +17,30 @@ public class Table {
     public Table() {
         this.idTable = 0;
         this.booked = false;
+        this.capacity = 0;
     }
 
     /**
-     * Table class constructor based on the id
+     * Table class constructor based on the id, capacity is set to 4 as default.
      *
      * @param idTable Represents the table's id number
      */
     public Table(int idTable) {
         this.idTable = 0;
         this.booked = false;
+        this.capacity = 4;
+    }
+
+    /**
+     * Table class constructor based on the id and capacity.
+     *
+     * @param idTable Represents the table's id number
+     * @param capacity Represents the table's capacity.
+     */
+    public Table(int idTable, int capacity) {
+        this.idTable = 0;
+        this.booked = false;
+        this.capacity = capacity;
     }
 
     /**
@@ -33,10 +48,12 @@ public class Table {
      *
      * @param idTable   Represents the table's id number
      * @param booked    Represents whether the table is booked or not
+     * @param capacity  Represents the tale's capacity
      */
-    public Table(int idTable, boolean booked) {
+    public Table(int idTable, boolean booked, int capacity) {
         this.idTable = idTable;
         this.booked = booked;
+        this.capacity = capacity;
     }
 
     public int getIdTable() {
