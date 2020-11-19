@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_2);
+        setContentView(R.layout.activity_main);
         /**
          * Get the database instance and initialize all the global variables (textfields, button, recyclerview, etc.)
          * Create thee recyclerview adapter and the spinner

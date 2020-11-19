@@ -4,93 +4,115 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/lightBg"
     tools:context=".utils.MainActivity">
 
-    <EditText
-        android:id="@+id/nameInput2"
+    <LinearLayout
+        android:id="@+id/TopBarMain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:fontFamily="@font/poppins_medium"
-        android:gravity="start"
-        android:hint="Name"
-        android:inputType="text"
-        android:textAlignment="viewStart"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/zone_recyclerview"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.42" />
-
-    <EditText
-        android:id="@+id/idInput"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        android:ems="10"
-        android:fontFamily="@font/poppins_medium"
-        android:gravity="start"
-        android:hint="Employee ID"
-        android:inputType="number"
-        android:textAlignment="viewStart"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/zone_recyclerview"
-        app:layout_constraintTop_toBottomOf="@+id/nameInput2"
-        app:layout_constraintVertical_bias="0.002" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="298dp"
-        android:layout_height="137dp"
-        android:layout_marginTop="80dp"
-        android:fontFamily="@font/lobster"
-        android:text="BarLink"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColor="#000000"
-        android:textSize="86sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="50dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/card"
+        android:orientation="horizontal"
+        android:paddingLeft="30dp"
+        android:paddingTop="20dp"
+        android:paddingRight="30dp"
+        android:paddingBottom="20dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/lobster"
+            android:text="@string/BarLink"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="@color/black"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/MainTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_weight="1"
+            android:text="Select the user"
+            android:textColor="@color/black"
+            android:textSize="28sp" />
+    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/zone_recyclerview"
-        android:layout_width="600dp"
-        android:layout_height="400dp"
-        android:layout_marginTop="60dp"
+        android:layout_width="650dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="130dp"
+        android:paddingLeft="50dp"
+        android:paddingTop="15dp"
+        android:paddingRight="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.036"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/TopBarMain"
+        app:layout_constraintVertical_bias="0.56" />
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="183dp"
-        android:layout_height="60dp"
-        android:fontFamily="@font/poppins_medium"
-        android:text="REGISTER"
-        app:backgroundTint="#03A9F4"
-        app:cornerRadius="100dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="65dp"
+        android:layout_marginRight="65dp"
+        app:cardElevation="10dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/zone_recyclerview"
-        app:layout_constraintTop_toBottomOf="@+id/spinner"
-        app:layout_constraintVertical_bias="0.343" />
+        app:layout_constraintTop_toTopOf="@+id/zone_recyclerview">
 
-    <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="295dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="4dp"
-        android:layout_marginRight="4dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.505"
-        app:layout_constraintStart_toEndOf="@+id/zone_recyclerview"
-        app:layout_constraintTop_toBottomOf="@+id/idInput"
-        app:layout_constraintVertical_bias="0.014" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/card"
+            android:orientation="vertical"
+            android:padding="30dp">
+
+            <EditText
+                android:id="@+id/idInput"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
+                android:ems="10"
+                android:fontFamily="@font/poppins_medium"
+                android:gravity="start"
+                android:hint="Employee ID"
+                android:inputType="number"
+                android:textAlignment="viewStart" />
+
+            <EditText
+                android:id="@+id/nameInput2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
+                android:ems="10"
+                android:fontFamily="@font/poppins_medium"
+                android:gravity="start"
+                android:hint="Name"
+                android:inputType="text"
+                android:textAlignment="viewStart" />
+
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="295dp"
+                android:layout_height="50dp"
+                android:layout_marginBottom="30dp" />
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="REGISTER"
+                app:backgroundTint="@color/primaryColor"
+                app:cornerRadius="100dp" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

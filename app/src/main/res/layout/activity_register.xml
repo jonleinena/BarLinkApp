@@ -13,14 +13,13 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
         android:layout_marginLeft="100dp"
+        android:layout_marginTop="80dp"
         android:fontFamily="@font/poppins_medium"
-        android:text="Register your establishment"
+        android:text="@string/RegisterTitle"
         android:textColor="@color/white"
         android:textSize="36sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.112" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -33,8 +32,8 @@
         android:padding="45dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.74">
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        app:layout_constraintVertical_bias="0.39">
 
         <EditText
             android:id="@+id/nameInput"
@@ -44,7 +43,7 @@
             android:ems="10"
             android:fontFamily="@font/poppins_medium"
             android:gravity="start"
-            android:hint="Name"
+            android:hint="@string/Name"
             android:inputType="text"
             android:textAlignment="viewStart" />
 
@@ -55,7 +54,7 @@
             android:layout_marginBottom="28dp"
             android:ems="10"
             android:fontFamily="@font/poppins_medium"
-            android:hint="NIF"
+            android:hint="@string/NIF"
             android:importantForAutofill="no"
             android:inputType="text" />
 
@@ -66,7 +65,7 @@
             android:layout_marginBottom="28dp"
             android:ems="10"
             android:fontFamily="@font/poppins_medium"
-            android:hint="E-mail"
+            android:hint="@string/Email"
             android:inputType="textWebEmailAddress" />
 
         <EditText
@@ -76,7 +75,7 @@
             android:layout_marginBottom="28dp"
             android:ems="10"
             android:fontFamily="@font/poppins_medium"
-            android:hint="Phone number"
+            android:hint="@string/Phone_number"
             android:inputType="phone" />
 
         <EditText
@@ -86,7 +85,7 @@
             android:layout_marginBottom="28dp"
             android:ems="10"
             android:fontFamily="@font/poppins_medium"
-            android:hint="Address"
+            android:hint="@string/Address"
             android:inputType="textPostalAddress" />
 
         <Button
@@ -95,9 +94,10 @@
             android:layout_height="64dp"
             android:backgroundTint="#03A9F4"
             android:fontFamily="@font/poppins_medium"
-            android:text="SUBMIT"
+            android:text="@string/Submit"
             android:textSize="18sp"
             android:textStyle="bold"
+            app:backgroundTint="@color/primaryColor"
             app:cornerRadius="100dp" />
     </LinearLayout>
 

@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Bar Link</string>
+    <string name="Submit">Submit</string>
+    <string name="Address">Address</string>
+    <string name="Phone_number">Phone number</string>
+    <string name="Email">E-mail</string>
+    <string name="NIF">NIF</string>
+    <string name="Name">Name</string>
+    <string name="RegisterTitle">Register your establishment</string>
+    <string name="BarLink">BarLink</string>
 </resources>

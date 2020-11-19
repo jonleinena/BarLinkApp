@@ -16,7 +16,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-/**claass to manage all the access to the database
+/**
+ * Class to manage all the access to the database
  * @author github.com/jonleinena
  * @author github.com/FerreMikel
  */
@@ -27,7 +28,7 @@ public class DBManager extends SQLiteOpenHelper {
     private static DBManager sInstance;
 
     /**
-     *static method to get the instance of the class that has been previously created, to avoid creating a new one.
+     * Static method to get the instance of the class that has been previously created, to avoid creating a new one.
      * @param context context of the app
      * @return the instance of the class
      */
