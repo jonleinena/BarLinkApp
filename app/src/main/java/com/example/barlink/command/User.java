@@ -1,5 +1,8 @@
 package com.example.barlink.command;
 
+
+import com.example.barlink.utils.I_Comparable;
+
 /**
  * Represents a user (employee)
  *
@@ -7,7 +10,7 @@ package com.example.barlink.command;
  * @author Mikel Ferrer - https://github.com/FerreMikel
  */
 
-public class User {
+public class User implements I_Comparable<User> {
     String name;
     int idEmployee;
     String typeEmployee;
@@ -56,5 +59,11 @@ public class User {
 
     public void setTypeEmployee(String typeEmployee) {
         this.typeEmployee = typeEmployee;
+    }
+
+
+    @Override
+    public boolean compare(User o) {
+        return this.idEmployee>o.getIdEmployee();
     }
 }

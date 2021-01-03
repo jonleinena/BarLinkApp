@@ -15,6 +15,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+/**
+ * Generic Adapter for recyclerview
+ * @deprecated
+ * @param <T> ArrayList to be displayed in the recyclerview
+ * @param <D> Context
+ */
+
 public abstract class GenericAdapter<T, D> extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private Context mContext;

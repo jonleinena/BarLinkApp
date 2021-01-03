@@ -11,6 +11,7 @@ import com.example.barlink.R;
 import com.example.barlink.database.DBManager;
 import com.example.barlink.establishment.Table;
 import com.example.barlink.establishment.Zone;
+import com.example.barlink.utils.adapters.GenericAdapter;
 import com.example.barlink.utils.adapters.TablesAdapter;
 import com.example.barlink.utils.adapters.ZoneAdapter;
 
@@ -21,7 +22,7 @@ public class Tables extends AppCompatActivity {
     private RecyclerView recyclerView;
     private DBManager dbManager;
     private int idUser, idZone;
-    private TablesAdapter adapter;
+    private GenericAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +42,22 @@ public class Tables extends AppCompatActivity {
 
     public void createAdapter(){
         // Create adapter passing in the sample user data
-        adapter = new TablesAdapter(tablesList);
+        adapter = new GenericAdapter(this,tablesList) {
+            @Override
+            public int getLayoutResId() {
+                return R.layout.activity_tables;
+            }
+
+            @Override
+            public void onBindData(Object model, int position, Object dataBinding) {
+
+            }
+
+            @Override
+            public void onItemClick(Object model, int position) {
+
+            }
+        };
         // Attach the adapter to the recyclerview to populate items
         recyclerView.setAdapter(adapter);
         // Set layout manager to position the items
