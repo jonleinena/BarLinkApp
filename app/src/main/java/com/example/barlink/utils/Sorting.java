@@ -2,8 +2,21 @@ package com.example.barlink.utils;
 
 import java.util.ArrayList;
 
+
+/**
+ * Class that contains the different algorithms used for sorting
+ * Algorithms are: Merge Sort and Quick Sort (using id numbers to sort elements and name)
+ * @author Jon Leiñena  - https://github.com/jonleinena
+ * @author Mikel Ferrer - https://github.com/FerreMikel
+ */
 public class Sorting {
 
+    /**
+     * Generic Merge Sort using id number
+     * @param list list to be sorted
+     * @param <T> type of the objects to sort
+     * @return sorted list
+     */
     public static <T extends I_Comparable<T>> ArrayList<T> mergeSortNum(ArrayList<T> list) {
         if (list.size() == 1) return list;
         else {
@@ -19,6 +32,13 @@ public class Sorting {
 
     }
 
+    /**
+     * Generic Merge function to merge and sort the divided lists (using id)
+     * @param a left list
+     * @param b right list
+     * @param <T> type of the objects in the list
+     * @return merged (and sorted) list
+     */
     public static <T extends I_Comparable<T>> ArrayList<T> mergeNum(ArrayList<T> a, ArrayList<T> b) {
         ArrayList<T> c = new ArrayList<>();
         while (!a.isEmpty() && !b.isEmpty()) {
@@ -42,6 +62,12 @@ public class Sorting {
         return c;
     }
 
+    /**
+     * Generic Merge Sort using name
+     * @param list list to be sorted
+     * @param <T> type of the objects to sort
+     * @return sorted list
+     */
     public static <T extends I_Comparable<T>> ArrayList<T> mergeSortStr(ArrayList<T> list) {
         if (list.size() == 1) return list;
         else {
@@ -57,6 +83,13 @@ public class Sorting {
 
     }
 
+    /**
+     * Generic Merge function to merge and sort the divided lists (using name)
+     * @param a left list
+     * @param b right list
+     * @param <T> type of the objects in the list
+     * @return merged (and sorted) list
+     */
     public static <T extends I_Comparable<T>> ArrayList<T> mergeStr(ArrayList<T> a, ArrayList<T> b) {
         ArrayList<T> c = new ArrayList<>();
         while (!a.isEmpty() && !b.isEmpty()) {
