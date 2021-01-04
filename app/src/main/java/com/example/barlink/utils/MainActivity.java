@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -28,7 +29,8 @@ public class MainActivity extends AppCompatActivity {
     private Spinner userTypeMenu;
     private EditText nameInput2;
     private EditText idInput;
-    private Button button, button2;
+    private Button button;
+    private ImageButton imageButton, imageButton2;
     private String name, selectedItem;
     private int userId;
     private FirstAdapter adapter;
@@ -51,7 +53,8 @@ public class MainActivity extends AppCompatActivity {
         nameInput2 = (EditText) findViewById(R.id.nameInput2);
         idInput = (EditText) findViewById(R.id.idInput);
         button = (Button) findViewById(R.id.button);
-        button2 = (Button) findViewById(R.id.button3);
+        imageButton2 = (ImageButton) findViewById(R.id.imageButton5);
+        imageButton = (ImageButton)findViewById(R.id.imageButton3);
 
         /**
          * When clicking the button the user is saved in teh database and the recyclerview updated
@@ -69,14 +72,20 @@ public class MainActivity extends AppCompatActivity {
                 showToast("User "+ name + " successfully registered");
             }
         });
-        button2.setOnClickListener(new View.OnClickListener() {
+        imageButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                users = Sorting.mergeSort(users);
+                users = Sorting.mergeSortNum(users);
                 createAdapter();
             }
         });
-
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                users = Sorting.mergeSortStr(users);
+                createAdapter();
+            }
+        });
     }
 
     /**

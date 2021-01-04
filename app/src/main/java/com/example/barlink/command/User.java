@@ -63,7 +63,11 @@ public class User implements I_Comparable<User> {
 
 
     @Override
-    public boolean compare(User o) {
+    public boolean compareNum(User o) {
         return this.idEmployee>o.getIdEmployee();
+    }
+    @Override
+    public boolean compareStr(User o){
+        return (int)this.name.toLowerCase().charAt(0)>(int)o.getName().toLowerCase().charAt(0);
     }
 }
