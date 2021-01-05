@@ -1,4 +1,6 @@
-package com.example.barlink.utils;
+package com.example.barlink.utils.sorting;
+
+import com.example.barlink.utils.sorting.I_Comparable;
 
 import java.util.ArrayList;
 

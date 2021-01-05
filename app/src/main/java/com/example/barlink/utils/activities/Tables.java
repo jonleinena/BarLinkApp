@@ -1,4 +1,4 @@
-package com.example.barlink.utils;
+package com.example.barlink.utils.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -22,7 +22,7 @@ public class Tables extends AppCompatActivity {
     private RecyclerView recyclerView;
     private DBManager dbManager;
     private int idUser, idZone;
-    private GenericAdapter adapter;
+    private TablesAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,41 +39,26 @@ public class Tables extends AppCompatActivity {
 
 
     }
-
     public void createAdapter(){
         // Create adapter passing in the sample user data
-        adapter = new GenericAdapter(this,tablesList) {
-            @Override
-            public int getLayoutResId() {
-                return R.layout.activity_tables;
-            }
-
-            @Override
-            public void onBindData(Object model, int position, Object dataBinding) {
-
-            }
-
-            @Override
-            public void onItemClick(Object model, int position) {
-
-            }
-        };
+        adapter = new TablesAdapter(tablesList);
         // Attach the adapter to the recyclerview to populate items
         recyclerView.setAdapter(adapter);
         // Set layout manager to position the items
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         // That's all!
-        /**
-        adapter.setOnItemClickListener(new ZoneAdapter.OnItemClickListener() {
+        adapter.setOnItemClickListener(new TablesAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                Zone selectedZone =  zoneList.get(position);
-                openNextActivity(idUser, selectedZone.getIdZone());
+                /**
+                 *
+                 */
 
             }
         });
-         */
+
     }
+
 
 
     /**

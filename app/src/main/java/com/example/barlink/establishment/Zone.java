@@ -12,6 +12,9 @@ public class Zone {
 
     int idZone;
     String name;
+    int capacity;
+
+
 
     /**
      * Empty constructor
@@ -30,6 +33,7 @@ public class Zone {
     public Zone(int idZone, String name) {
         this.idZone = idZone;
         this.name = name;
+
     }
 
 
@@ -49,4 +53,5 @@ public class Zone {
     public void setName(String name) {
         this.name = name;
     }
+
 }

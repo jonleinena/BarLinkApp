@@ -1,4 +1,4 @@
-package com.example.barlink.utils;
+package com.example.barlink.utils.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -24,7 +24,7 @@ public class Zones extends AppCompatActivity {
     private ZoneAdapter adapter;
     private ArrayList<Zone> zoneList;
     private RecyclerView recyclerView;
-    private int newZoneId;
+    private int newZoneId, capacityNum;
     private String newZoneName;
     private Button button;
     private EditText idET, zoneNameET;
@@ -44,6 +44,7 @@ public class Zones extends AppCompatActivity {
 
         idET = (EditText) findViewById(R.id.zoneIdInput);
         zoneNameET = (EditText) findViewById(R.id.zoneNameInput);
+
         button = (Button) findViewById(R.id.button2);
 
         button.setOnClickListener(new View.OnClickListener() {

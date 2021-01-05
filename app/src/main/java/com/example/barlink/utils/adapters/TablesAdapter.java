@@ -37,7 +37,7 @@ public class TablesAdapter extends RecyclerView.Adapter<TablesAdapter.ViewHolder
 
         public ViewHolder(View itemView, final TablesAdapter.OnItemClickListener listener) {
             super(itemView);
-            tablesItemName = (TextView) itemView.findViewById(R.id.tableNumber);
+            tablesItemName = (TextView) itemView.findViewById(R.id.tableNum);
 
 
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -66,7 +66,7 @@ public class TablesAdapter extends RecyclerView.Adapter<TablesAdapter.ViewHolder
         LayoutInflater inflater = LayoutInflater.from(context);
 
         // Inflate the custom layout
-        View matchesView = inflater.inflate(R.layout.rounded_table, parent, false);
+        View matchesView = inflater.inflate(R.layout.table_list_item, parent, false);
 
         // Return a new holder instance
         ViewHolder viewHolder = new ViewHolder(matchesView, mListener);
@@ -81,8 +81,8 @@ public class TablesAdapter extends RecyclerView.Adapter<TablesAdapter.ViewHolder
 
 
         // Set item views based on your views and data model
-        TextView tableItem = viewHolder.tablesItemName;
-        tableItem.setText(table.getIdTable()+"");
+        TextView tableNum = viewHolder.tablesItemName;
+        tableNum.setText(table.getIdTable()+"");
 
     }
 

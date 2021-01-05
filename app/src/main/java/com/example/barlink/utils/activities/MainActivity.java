@@ -1,4 +1,4 @@
-package com.example.barlink.utils;
+package com.example.barlink.utils.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -19,6 +19,7 @@ import com.example.barlink.R;
 import com.example.barlink.command.User;
 import com.example.barlink.database.DBManager;
 import com.example.barlink.utils.adapters.FirstAdapter;
+import com.example.barlink.utils.sorting.Sorting;
 
 import java.util.ArrayList;
 

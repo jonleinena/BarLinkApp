@@ -1,4 +1,4 @@
-package com.example.barlink.utils;
+package com.example.barlink.utils.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 

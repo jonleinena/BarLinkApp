@@ -12,11 +12,11 @@
         android:screenOrientation="landscape"
         android:supportsRtl="true"
         android:theme="@style/Theme.Barlink">
-        <activity android:name=".utils.Tables"></activity>
-        <activity android:name=".utils.Zones" />
-        <activity android:name=".utils.MainActivity" />
-        <activity android:name=".utils.Register" />
-        <activity android:name=".utils.WelcomeActivity">
+        <activity android:name=".utils.activities.Tables"></activity>
+        <activity android:name=".utils.activities.Zones" />
+        <activity android:name=".utils.activities.MainActivity" />
+        <activity android:name=".utils.activities.Register" />
+        <activity android:name=".utils.activities.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

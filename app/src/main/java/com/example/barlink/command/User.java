@@ -1,7 +1,7 @@
 package com.example.barlink.command;
 
 
-import com.example.barlink.utils.I_Comparable;
+import com.example.barlink.utils.sorting.I_Comparable;
 
 /**
  * Represents a user (employee)
