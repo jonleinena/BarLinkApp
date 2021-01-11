@@ -68,14 +68,13 @@ public class DBManager extends SQLiteOpenHelper {
                 ")");
         db.execSQL("CREATE TABLE ZONE(" +
                 "idZone integer NOT NULL," +
-                "name TEXT"+
+                "name TEXT,"+
+                "capacity integer"+
                 ")");
         db.execSQL("CREATE TABLE TABLE_DB (" +
-                "idTable integer NOT NULL," +
+                "idTable integer NOT NULL PRIMARY KEY," +
                 "idZone integer NOT NULL," +
-                "tableCapacity real NOT NULL," +
-                "FOREIGN KEY(idZone) REFERENCES ZONE(idZone)," +
-                "PRIMARY KEY(idTable, idZone)" +
+                "FOREIGN KEY(idZone) REFERENCES ZONE(idZone)" +
                 ")");
         db.execSQL("CREATE TABLE PRODUCT_CATEGORY (" +
                 "idCategory integer PRIMARY KEY," +
@@ -215,7 +214,7 @@ public class DBManager extends SQLiteOpenHelper {
         Cursor res = getReadableDatabase().rawQuery(sql, null);
         ArrayList<Zone> zones = new ArrayList<>();
         while (res.moveToNext()) {
-            zones.add(new Zone(res.getInt(res.getColumnIndex("idZone")), res.getString(res.getColumnIndex("name"))));
+            zones.add(new Zone(res.getInt(res.getColumnIndex("idZone")), res.getString(res.getColumnIndex("name")), res.getInt(res.getColumnIndex("capacity"))));
         }
         return zones;
     }
@@ -228,6 +227,7 @@ public class DBManager extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put("idZone", zone.getIdZone());
         values.put("name", zone.getName());
+        values.put("capacity", zone.getCapacity());
         getWritableDatabase().insert("ZONE", null, values);
     }
 
@@ -243,9 +243,21 @@ public class DBManager extends SQLiteOpenHelper {
         Cursor res = getReadableDatabase().rawQuery(sql, args);
         ArrayList<Table> tables = new ArrayList<>();
         while (res.moveToNext()) {
-            tables.add(new Table(res.getInt(res.getColumnIndex("idTable")), res.getInt(res.getColumnIndex("tableCapacity"))));
+            tables.add(new Table(res.getInt(res.getColumnIndex("idTable")), res.getInt(res.getColumnIndex("idZone"))));
         }
         return tables;
+    }
+
+    /**
+     * Method to save tables in database
+     * @param table table element to save
+     */
+    public void saveTables(Table table){
+        ContentValues values = new ContentValues();
+        values.put("idTable", table.getIdTable());
+        values.put("idZone", table.getIdZone());
+        getWritableDatabase().insert("TABLE_DB", null, values);
+
     }
 
 

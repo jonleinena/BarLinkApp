@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.example.barlink.R;
 import com.example.barlink.database.DBManager;
+import com.example.barlink.establishment.Table;
 import com.example.barlink.establishment.Zone;
 import com.example.barlink.utils.adapters.ZoneAdapter;
 
@@ -23,11 +24,12 @@ public class Zones extends AppCompatActivity {
     private DBManager dbManager;
     private ZoneAdapter adapter;
     private ArrayList<Zone> zoneList;
+    private ArrayList<Table> tables;
     private RecyclerView recyclerView;
     private int newZoneId, capacityNum;
     private String newZoneName;
     private Button button;
-    private EditText idET, zoneNameET;
+    private EditText idET, zoneNameET, capacityET;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,18 +46,22 @@ public class Zones extends AppCompatActivity {
 
         idET = (EditText) findViewById(R.id.zoneIdInput);
         zoneNameET = (EditText) findViewById(R.id.zoneNameInput);
-
+        capacityET = (EditText)findViewById(R.id.capacityInput);
         button = (Button) findViewById(R.id.button2);
-
+        tables = new ArrayList<Table>();
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 newZoneName = String.valueOf(zoneNameET.getText()+"");
                 newZoneId = Integer.valueOf(idET.getText()+"");
-                Zone zone = new Zone(newZoneId, newZoneName);
+                capacityNum = Integer.valueOf(capacityET.getText()+"");
+                Zone zone = new Zone(newZoneId, newZoneName,capacityNum);
                 zoneList.add(zone);
                 dbManager.saveZone(zone);
                 adapter.notifyItemInserted(zoneList.size()-1);
+
+                createTables(capacityNum);
+                tables.stream().forEach(table -> dbManager.saveTables(table));
                 emptyTextFields();
                 showToast("Zone "+ newZoneId + " successfully registered");
 
@@ -100,6 +106,7 @@ public class Zones extends AppCompatActivity {
     public void emptyTextFields(){
         idET.setText("");
         zoneNameET.setText("");
+        capacityET.setText("");
     }
 
     public void openNextActivity(int idUser, int idZone){
@@ -109,5 +116,11 @@ public class Zones extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void createTables(int capacity){
+        for(int i = 0; i<capacity; i++){
+            this.tables.add(new Table(i, newZoneId));
+        }
+
+    }
 
 }

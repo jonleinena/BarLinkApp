@@ -1,5 +1,7 @@
 package com.example.barlink.establishment;
 
+import com.google.android.material.transition.ScaleProvider;
+
 import java.util.ArrayList;
 
 /**
@@ -22,6 +24,7 @@ public class Zone {
     public Zone() {
         idZone = 0;
         name = "";
+        capacity = 0;
     }
 
     /**
@@ -30,11 +33,10 @@ public class Zone {
      * @param idZone   zone's unique identifier
      * @param name     zone's capacity
      */
-    public Zone(int idZone, String name) {
+    public Zone(int idZone, String name, int  capacity) {
         this.idZone = idZone;
         this.name = name;
-
-    }
+        this.capacity = capacity;    }
 
 
     public int getIdZone() {
@@ -54,4 +56,11 @@ public class Zone {
         this.name = name;
     }
 
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
+    }
 }

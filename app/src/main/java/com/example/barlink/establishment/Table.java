@@ -9,7 +9,7 @@ package com.example.barlink.establishment;
 public class Table {
     int idTable;
     boolean booked;
-    int capacity;
+    int idZone;
 
     /**
      * Empty constructor
@@ -17,7 +17,7 @@ public class Table {
     public Table() {
         this.idTable = 0;
         this.booked = false;
-        this.capacity = 0;
+        this.idZone = 0;
     }
 
     /**
@@ -25,22 +25,10 @@ public class Table {
      *
      * @param idTable Represents the table's id number
      */
-    public Table(int idTable) {
-        this.idTable = 0;
+    public Table(int idTable, int idZone) {
+        this.idTable = idTable;
         this.booked = false;
-        this.capacity = 4;
-    }
-
-    /**
-     * Table class constructor based on the id and capacity.
-     *
-     * @param idTable Represents the table's id number
-     * @param capacity Represents the table's capacity.
-     */
-    public Table(int idTable, int capacity) {
-        this.idTable = 0;
-        this.booked = false;
-        this.capacity = capacity;
+        this.idZone = idZone;
     }
 
     /**
@@ -48,12 +36,11 @@ public class Table {
      *
      * @param idTable   Represents the table's id number
      * @param booked    Represents whether the table is booked or not
-     * @param capacity  Represents the tale's capacity
      */
-    public Table(int idTable, boolean booked, int capacity) {
+    public Table(int idTable, boolean booked, int idZone) {
         this.idTable = idTable;
         this.booked = booked;
-        this.capacity = capacity;
+        this.idZone = idZone;
     }
 
     public int getIdTable() {
@@ -80,5 +67,13 @@ public class Table {
 
     public boolean tableStatus() {
         return this.booked;
+    }
+
+    public int getIdZone() {
+        return idZone;
+    }
+
+    public void setIdZone(int idZone) {
+        this.idZone = idZone;
     }
 }
