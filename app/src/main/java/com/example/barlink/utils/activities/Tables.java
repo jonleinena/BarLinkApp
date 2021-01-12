@@ -1,6 +1,7 @@
 package com.example.barlink.utils.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -32,6 +33,7 @@ public class Tables extends AppCompatActivity {
         getExtra();
         tablesList = dbManager.getTablesByZone(idZone);
         recyclerView = (RecyclerView) findViewById(R.id.tables_recyclerview);
+
         createAdapter();
 
 
@@ -45,7 +47,7 @@ public class Tables extends AppCompatActivity {
         // Attach the adapter to the recyclerview to populate items
         recyclerView.setAdapter(adapter);
         // Set layout manager to position the items
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 3));
         // That's all!
         adapter.setOnItemClickListener(new TablesAdapter.OnItemClickListener() {
             @Override
@@ -67,7 +69,7 @@ public class Tables extends AppCompatActivity {
     public void getExtra(){
         Intent intent = getIntent();
         idUser = intent.getIntExtra("selectedUser", 0);
-        idZone = intent.getIntExtra("selctedZone", 1);
+        idZone = intent.getIntExtra("selectedZone", 1);
 
     }
 }
