@@ -3,6 +3,7 @@ package com.example.barlink.utils.sorting;
 import com.example.barlink.utils.sorting.I_Comparable;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 
 /**
@@ -115,6 +116,25 @@ public class Sorting {
         return c;
     }
 
+    public static <E extends I_Comparable<E>> void quicksort(ArrayList<E> a, int low, int high) {
+        if (low < high) {
+            int pivotLocation = partition(a, low, high);
+            quicksort(a, low, pivotLocation);
+            quicksort(a, pivotLocation + 1, high);
+        }
+    }
 
+    private static <E extends I_Comparable<E>> int partition(ArrayList<E> a, int low, int high) {
+        E pivot = a.get(low);
+        int left = low;
+        for (int i=low+1;i<high;i++) {
+            if(a.get(i).compareStr(pivot)) {
+                Collections.swap(a, i, left);
+                left += 1;
+            }
+        }
+        Collections.swap(a, low, left);
+        return left;
+    }
 
 }
