@@ -8,4 +8,10 @@
     <string name="Name">Name</string>
     <string name="RegisterTitle">Register your establishment</string>
     <string name="BarLink">BarLink</string>
+    <string name="title_activity_command">CommandActivity</string>
+    <!--
+    This string is used for square devices and overridden by hello_world in
+    values-round/strings.xml for round devices.
+    -->
+    <string name="hello_world">Hello Square World!</string>
 </resources>
