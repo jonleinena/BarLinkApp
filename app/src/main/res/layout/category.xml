@@ -45,10 +45,13 @@
                     app:layout_constraintTop_toBottomOf="@+id/category">
 
                     <androidx.recyclerview.widget.RecyclerView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        tools:layout_editor_absoluteX="197dp"
-                        tools:layout_editor_absoluteY="117dp" />
+                        android:id="@+id/prod_recyclerview"
+                        android:layout_width="1261dp"
+                        android:layout_height="700dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>

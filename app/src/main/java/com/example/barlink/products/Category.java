@@ -1,6 +1,8 @@
 package com.example.barlink.products;
 
 
+import java.util.ArrayList;
+
 /**
  * Represents a category of product
  *
@@ -11,11 +13,22 @@ public class Category {
     private int idCategory;
     private String name;
     private boolean expanded;
+    private ArrayList<Product> products;
 
-    public Category(int idCategory, String name) {
+
+    public Category(int idCategory, String name ) {
         this.idCategory = idCategory;
         this.name = name;
         this.expanded = false;
+        this.products = new ArrayList<Product>();
+    }
+
+    public ArrayList<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(ArrayList<Product> products) {
+        this.products = products;
     }
 
     public int getIdCategory() {

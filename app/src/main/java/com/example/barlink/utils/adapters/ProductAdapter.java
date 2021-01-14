@@ -1,9 +1,12 @@
 package com.example.barlink.utils.adapters;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,8 +17,14 @@ import com.example.barlink.products.Product;
 
 import java.util.ArrayList;
 
+
+/**
+ * @version ALPHA
+ * not finished adapter
+ */
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder>{
     private ArrayList<Product> myList;
+    private Context context;
     private ProductAdapter.OnItemClickListener mListener;
 
     public interface OnItemClickListener{
@@ -31,22 +40,24 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     // you provide access to all the views for a data item in a view holder
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView tablesItemName;
+        public TextView productName;
+        public TextView price;
+        public ImageView img;
 
 
         public ViewHolder(View itemView, final ProductAdapter.OnItemClickListener listener) {
             super(itemView);
-            tablesItemName = (TextView) itemView.findViewById(R.id.tableNum);
+            productName = (TextView) itemView.findViewById(R.id.productName);
+            price = (TextView)itemView.findViewById(R.id.productPrice);
+            img = (ImageView)itemView.findViewById(R.id.productImage);
 
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if(listener!= null){
-                        int position = getAdapterPosition();
-                        if(position!= RecyclerView.NO_POSITION){
-                            listener.onItemClick(position);
-                        }
+
+            itemView.setOnClickListener(v -> {
+                if(listener!= null){
+                    int position = getAdapterPosition();
+                    if(position!= RecyclerView.NO_POSITION){
+                        listener.onItemClick(position);
                     }
                 }
             });
@@ -54,8 +65,9 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     }
 
     //constructor
-    public ProductAdapter(ArrayList<Product> myList) {
+    public ProductAdapter(ArrayList<Product> myList, Context context) {
         this.myList = myList;
+        this.context = context;
     }
 
     // Create new views (invoked by the layout manager)
@@ -80,8 +92,10 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
 
 
         // Set item views based on your views and data model
-        TextView tableNum = viewHolder.tablesItemName;
-        tableNum.setText(p.getIdProduct()+"");
+
+        viewHolder.productName.setText(p.getName()+"");
+        viewHolder.price.setText(p.getPrice()+"");
+        //viewHolder.img.setImageIcon();
 
     }
 

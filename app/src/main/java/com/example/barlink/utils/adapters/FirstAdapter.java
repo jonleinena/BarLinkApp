@@ -50,14 +50,11 @@ public class FirstAdapter extends RecyclerView.Adapter<FirstAdapter.ViewHolder> 
             userType = (TextView) itemView.findViewById(R.id.userType);
             Pic = (ImageView) itemView.findViewById(R.id.image);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if(listener!= null){
-                        int position = getAdapterPosition();
-                        if(position!= RecyclerView.NO_POSITION){
-                            listener.onItemClick(position);
-                        }
+            itemView.setOnClickListener(v -> {
+                if(listener!= null){
+                    int position = getAdapterPosition();
+                    if(position!= RecyclerView.NO_POSITION){
+                        listener.onItemClick(position);
                     }
                 }
             });

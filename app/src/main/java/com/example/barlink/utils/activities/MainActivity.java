@@ -60,32 +60,23 @@ public class MainActivity extends AppCompatActivity {
         /**
          * When clicking the button the user is saved in teh database and the recyclerview updated
          */
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                name = nameInput2.getText().toString();
-                userId = Integer.valueOf(idInput.getText().toString());
-                User user = new User(name, userId, selectedItem);
-                users.add(user);
-                dbManager.saveUser(user);
-                adapter.notifyDataSetChanged();
-                emptyTextFields();
-                showToast("User "+ name + " successfully registered");
-            }
+        button.setOnClickListener(v -> {
+            name = nameInput2.getText().toString();
+            userId = Integer.valueOf(idInput.getText().toString());
+            User user = new User(name, userId, selectedItem);
+            users.add(user);
+            dbManager.saveUser(user);
+            adapter.notifyDataSetChanged();
+            emptyTextFields();
+            showToast("User "+ name + " successfully registered");
         });
-        imageButton2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                users = Sorting.mergeSortNum(users);
-                createAdapter();
-            }
+        imageButton2.setOnClickListener(v -> {
+            users = Sorting.mergeSortNum(users);
+            createAdapter();
         });
-        imageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                users = Sorting.mergeSortStr(users);
-                createAdapter();
-            }
+        imageButton.setOnClickListener(v -> {
+            users = Sorting.mergeSortStr(users);
+            createAdapter();
         });
     }
 
@@ -103,13 +94,10 @@ public class MainActivity extends AppCompatActivity {
         /**
          * When selecting a user from the recyclerview the next activity is opened
          */
-        adapter.setOnItemClickListener(new FirstAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-               User selectedUser =  users.get(position);
-                openNextActivity(selectedUser);
+        adapter.setOnItemClickListener(position -> {
+           User selectedUser =  users.get(position);
+            openNextActivity(selectedUser);
 
-            }
         });
 
     }

@@ -310,18 +310,19 @@ public class DBManager extends SQLiteOpenHelper {
 
     /**
      * Method to get all products from a determined category
-     * @param idCat category identifier
+     * @param cat category for the identifier
      * @return list containing all product objects
      */
-    public ArrayList<Product> getProducts(int idCat){
+    public ArrayList<Product> getProducts(Category cat){
         ArrayList<Product> products = new ArrayList<>();
         String sql = "SELECT * FROM MENU_PRODUCT WHERE idCategory = ?";
         String[] args = new String[1];
-        args[0] = idCat + "";
+        args[0] = cat.getIdCategory() + "";
         Cursor res = getReadableDatabase().rawQuery(sql, args);
         while (res.moveToNext()) {
             products.add(new Product(res.getInt(res.getColumnIndex("idProduct")), res.getString(res.getColumnIndex("name")), res.getString(res.getColumnIndex("imagePath")), res.getFloat(res.getColumnIndex("price"))));
         }
+        cat.setProducts(products);
         return products;
     }
 
