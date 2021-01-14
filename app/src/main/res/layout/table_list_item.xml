@@ -1,45 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
+    android:orientation="horizontal"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:cardElevation="10dp"
+    app:cardCornerRadius="5dp"
+    android:layout_margin="10dp">
     <LinearLayout
-        android:layout_width="464dp"
-        android:layout_height="311dp"
+        android:layout_width="123dp"
+        android:layout_height="90dp"
         android:orientation="horizontal"
-        tools:layout_editor_absoluteX="182dp"
-        tools:layout_editor_absoluteY="62dp">
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
 
         <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="309dp">
+            android:layout_height="wrap_content">
 
             <ImageView
                 android:id="@+id/imageView"
-                android:layout_width="462dp"
-                android:layout_height="313dp"
+                android:layout_width="130dp"
+                android:layout_height="89dp"
                 app:srcCompat="@drawable/ic_mesa_redonda" />
 
             <TextView
                 android:id="@+id/tableNum"
-                android:layout_width="103dp"
-                android:layout_height="62dp"
+                android:layout_width="19dp"
+                android:layout_height="35dp"
                 android:layout_alignEnd="@+id/imageView"
                 android:layout_alignRight="@+id/imageView"
                 android:layout_alignBottom="@+id/imageView"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginStart="181dp"
-                android:layout_marginLeft="181dp"
-                android:layout_marginTop="123dp"
-                android:layout_marginEnd="178dp"
-                android:layout_marginRight="178dp"
-                android:layout_marginBottom="128dp"
-                android:text="TextView" />
+                android:layout_marginStart="52dp"
+                android:layout_marginLeft="52dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="52dp"
+                android:layout_marginRight="52dp"
+                android:layout_marginBottom="30dp"
+                android:text="1"
+                android:textColor="#000000"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
         </RelativeLayout>
     </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

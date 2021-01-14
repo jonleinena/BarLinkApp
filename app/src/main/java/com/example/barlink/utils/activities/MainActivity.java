@@ -159,9 +159,10 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Method to open next activity
+     *
      * @param user user selected, needed to pass the active user's id for following activities.
      */
-    private void openNextActivity(User user){
+    private void openNextActivity(User user) {
         Intent intent = new Intent(this, Zones.class);
         intent.putExtra("selectedUser", user.getIdEmployee());
         startActivity(intent);

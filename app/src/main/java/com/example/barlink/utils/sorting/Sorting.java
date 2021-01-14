@@ -9,6 +9,7 @@ import java.util.Collections;
 /**
  * Class that contains the different algorithms used for sorting
  * Algorithms are: Merge Sort and Quick Sort (using id numbers to sort elements and name)
+ *
  * @author Jon Leiñena  - https://github.com/jonleinena
  * @author Mikel Ferrer - https://github.com/FerreMikel
  */
@@ -16,14 +17,15 @@ public class Sorting {
 
     /**
      * Generic Merge Sort using id number
+     *
      * @param list list to be sorted
-     * @param <T> type of the objects to sort
+     * @param <T>  type of the objects to sort
      * @return sorted list
      */
     public static <T extends I_Comparable<T>> ArrayList<T> mergeSortNum(ArrayList<T> list) {
         if (list.size() == 1) return list;
         else {
-            ArrayList<T> listLeft = new ArrayList<T>(list.subList(0, list.size() / 2 ));
+            ArrayList<T> listLeft = new ArrayList<T>(list.subList(0, list.size() / 2));
             ArrayList<T> listRight = new ArrayList<T>(list.subList(list.size() / 2, list.size()));
 
             listLeft = mergeSortNum(listLeft);
@@ -37,8 +39,9 @@ public class Sorting {
 
     /**
      * Generic Merge function to merge and sort the divided lists (using id)
-     * @param a left list
-     * @param b right list
+     *
+     * @param a   left list
+     * @param b   right list
      * @param <T> type of the objects in the list
      * @return merged (and sorted) list
      */
@@ -67,14 +70,15 @@ public class Sorting {
 
     /**
      * Generic Merge Sort using name
+     *
      * @param list list to be sorted
-     * @param <T> type of the objects to sort
+     * @param <T>  type of the objects to sort
      * @return sorted list
      */
     public static <T extends I_Comparable<T>> ArrayList<T> mergeSortStr(ArrayList<T> list) {
         if (list.size() == 1) return list;
         else {
-            ArrayList<T> listLeft = new ArrayList<T>(list.subList(0, list.size() / 2 ));
+            ArrayList<T> listLeft = new ArrayList<T>(list.subList(0, list.size() / 2));
             ArrayList<T> listRight = new ArrayList<T>(list.subList(list.size() / 2, list.size()));
 
             listLeft = mergeSortStr(listLeft);
@@ -88,8 +92,9 @@ public class Sorting {
 
     /**
      * Generic Merge function to merge and sort the divided lists (using name)
-     * @param a left list
-     * @param b right list
+     *
+     * @param a   left list
+     * @param b   right list
      * @param <T> type of the objects in the list
      * @return merged (and sorted) list
      */
@@ -142,8 +147,8 @@ public class Sorting {
     private static <E extends I_Comparable<E>> int partition(ArrayList<E> a, int low, int high) {
         E pivot = a.get(low);
         int left = low;
-        for (int i=low+1;i<high;i++) {
-            if(a.get(i).compareStr(pivot)) {
+        for (int i = low + 1; i < high; i++) {
+            if (a.get(i).compareStr(pivot)) {
                 Collections.swap(a, i, left);
                 left += 1;
             }

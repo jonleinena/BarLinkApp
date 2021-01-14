@@ -10,7 +10,10 @@ import com.example.barlink.command.User;
 import com.example.barlink.establishment.Establishment;
 import com.example.barlink.establishment.Table;
 import com.example.barlink.establishment.Zone;
+import com.example.barlink.products.Category;
+import com.example.barlink.products.Product;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -83,13 +86,10 @@ public class DBManager extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE MENU_PRODUCT (" +
                 "idProduct integer," +
                 "idCategory integer NOT NULL," +
-                "idCommand integer NOT NULL," +
                 "name text NOT NULL," +
                 "price real NOT NULL," +
-                "description ingredients NOT NULL," +
                 "imagePath text NOT NULL," +
                 "FOREIGN KEY(idCategory) REFERENCES PRODUCT_CATEGORY(idCategory)," +
-                "FOREIGN KEY(idCommand) REFERENCES COMMAND(idCommand)," +
                 "PRIMARY KEY(idProduct, idCategory)" +
                 ")");
         db.execSQL("CREATE TABLE COMMAND (" +
@@ -131,6 +131,39 @@ public class DBManager extends SQLiteOpenHelper {
                 "FOREIGN KEY(idCommand) REFERENCES COMMAND(idCommand) ON DELETE CASCADE," +
                 "FOREIGN KEY(idProduct) REFERENCES MENU_PRODUCT(idProduct) ON DELETE CASCADE" +
                 ");");
+        db.execSQL("INSERT INTO PRODUCT_CATEGORY(idCategory, name)" +
+                "VALUES (1, 'Bebidas')," +
+                "(2, 'Entrantes')," +
+                "(3, 'Carnes')," +
+                "(4, 'Pescados')," +
+                "(5, 'Ensaladas')," +
+                "(6, 'Postres')");
+        db.execSQL("INSERT INTO MENU_PRODUCT(idProduct, idCategory, name, imagePath, price)" +
+                "VALUES (1, 1, 'Agua', 'bebida.png', 1.5)," +
+                " (2, 1, 'Fanta de Naranja', 'bebida.png', 2)," +
+                " (3, 1, 'Fanta de Limón', 'bebida.png', 2)," +
+                " (4, 1, 'Coca Cola', 'bebida.png', 2.2)," +
+                " (5, 1, 'Cerveza', 'bebida.png', 1.8)," +
+                " (6, 2, 'Jamón Ibérico', 'entrantes.png', 15)," +
+                " (7, 2, 'Croquetas', 'entrantes.png', 10)," +
+                " (8, 2, 'Fritos', 'entrantes.png', 11)," +
+                " (9, 2, 'Caldo de pescado', 'entrantes.png', 6.5)," +
+                " (10, 3, 'Entrecot', 'carne.png', 12)," +
+                " (11, 3, 'Escalope', 'carne.png', 11)," +
+                " (12, 3, 'Chuleta', 'carne.png', 27.5)," +
+                " (13, 4, 'Lubina', 'pez.png', 15)," +
+                " (14, 4, 'Merluza', 'pez.png', 19)," +
+                " (15, 4, 'Rodaballo', 'pez.png', 28)," +
+                " (16, 4, 'Bacalao', 'pez.png', 16)," +
+                " (17, 5, 'Ensalada mixta', 'ensalada.png', 7)," +
+                " (18, 5, 'Ensalada César', 'ensalada.png', 9.5)," +
+                " (19, 5, 'Ensalada de gulas', 'ensalada.png', 10.3)," +
+                " (20, 6, 'Coulant de chocolate', 'postre.png', 4.5)," +
+                " (21, 6, 'Helado', 'postre.png', 1.5)," +
+                " (22, 6, 'Tarta de queso', 'postre.png', 3.5)," +
+                " (23, 6, 'Café', 'postre.png', 1.1)," +
+                " (24, 6, 'Flan de huevo', 'postre.png', 1.5)," +
+                " (25, 6, 'Combinado', 'postre.png', 5.5)");
     }
 
     @Override
@@ -260,6 +293,36 @@ public class DBManager extends SQLiteOpenHelper {
 
     }
 
+    /**
+     * Method to get all the product categories from the database
+     * @return list containing all categories
+     */
+    public ArrayList<Category> getCategories() {
+        ArrayList<Category> list = new ArrayList<>();
+        String sql = "SELECT * FROM PRODUCT_CATEGORY";
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor res = db.rawQuery(sql, null);
+        while (res.moveToNext()) {
+            list.add(new Category(res.getInt(res.getColumnIndex("idCategory")), res.getString(res.getColumnIndex("name"))));
+        }
+        return list;
+    }
 
+    /**
+     * Method to get all products from a determined category
+     * @param idCat category identifier
+     * @return list containing all product objects
+     */
+    public ArrayList<Product> getProducts(int idCat){
+        ArrayList<Product> products = new ArrayList<>();
+        String sql = "SELECT * FROM MENU_PRODUCT WHERE idCategory = ?";
+        String[] args = new String[1];
+        args[0] = idCat + "";
+        Cursor res = getReadableDatabase().rawQuery(sql, args);
+        while (res.moveToNext()) {
+            products.add(new Product(res.getInt(res.getColumnIndex("idProduct")), res.getString(res.getColumnIndex("name")), res.getString(res.getColumnIndex("imagePath")), res.getFloat(res.getColumnIndex("price"))));
+        }
+        return products;
+    }
 
 }
