@@ -116,6 +116,13 @@ public class Sorting {
         return c;
     }
 
+    /**
+     * Generic Quicksort method
+     * @param a Array to be sorted
+     * @param low Index of the first element
+     * @param high Index of the last element
+     * @param <E> Type of the elements in the array
+     */
     public static <E extends I_Comparable<E>> void quicksort(ArrayList<E> a, int low, int high) {
         if (low < high) {
             int pivotLocation = partition(a, low, high);
@@ -124,6 +131,14 @@ public class Sorting {
         }
     }
 
+    /**
+     * Method to calculate the mid element in the Arrray
+     * @param a Array to be sorted
+     * @param low Index of the first element
+     * @param high Index of the last element
+     * @param <E> Type of the elements in the array
+     * @return The index of the mid element
+     */
     private static <E extends I_Comparable<E>> int partition(ArrayList<E> a, int low, int high) {
         E pivot = a.get(low);
         int left = low;
