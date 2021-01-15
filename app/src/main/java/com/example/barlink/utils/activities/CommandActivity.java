@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * @deprecated
+ *
  * not finished/working fully
  */
 public class CommandActivity extends AppCompatActivity {

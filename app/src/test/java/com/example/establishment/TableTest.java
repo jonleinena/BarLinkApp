@@ -22,8 +22,8 @@ public class TableTest {
     @Before
     public void setUp() throws Exception {
         this.t1 = new Table();
-        this.t2 = new Table(02, false);
-        this.t3 = new Table(03, true);
+        this.t2 = new Table(02, 0);
+        this.t3 = new Table(03, 0);
     }
 
     @After

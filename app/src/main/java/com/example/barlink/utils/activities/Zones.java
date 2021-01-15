@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.barlink.R;
@@ -16,6 +17,7 @@ import com.example.barlink.database.DBManager;
 import com.example.barlink.establishment.Table;
 import com.example.barlink.establishment.Zone;
 import com.example.barlink.utils.adapters.ZoneAdapter;
+import com.example.barlink.utils.sorting.Sorting;
 
 import java.util.ArrayList;
 
@@ -29,6 +31,7 @@ public class Zones extends AppCompatActivity {
     private int newZoneId, capacityNum;
     private String newZoneName;
     private Button button;
+    private ImageButton imageButton;
     private EditText idET, zoneNameET, capacityET;
 
     @Override
@@ -48,6 +51,7 @@ public class Zones extends AppCompatActivity {
         zoneNameET = (EditText) findViewById(R.id.zoneNameInput);
         capacityET = (EditText)findViewById(R.id.capacityInput);
         button = (Button) findViewById(R.id.button2);
+        imageButton = (ImageButton) findViewById(R.id.imageButton);
         tables = new ArrayList<Table>();
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,8 +71,10 @@ public class Zones extends AppCompatActivity {
 
             }
         });
-
-
+        imageButton.setOnClickListener(v -> {
+            zoneList = Sorting.mergeSortStr(zoneList);
+            createAdapter();
+        });
     }
     private void showToast(String text) {
         Toast.makeText(this, text, Toast.LENGTH_SHORT).show();

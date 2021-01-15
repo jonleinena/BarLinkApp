@@ -13,11 +13,7 @@ import com.example.barlink.establishment.Zone;
 import com.example.barlink.products.Category;
 import com.example.barlink.products.Product;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
 
 /**
  * Class to manage all the access to the database
@@ -25,7 +21,6 @@ import java.util.Map;
  * @author github.com/FerreMikel
  */
 public class DBManager extends SQLiteOpenHelper {
-
     public static final int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "BarLink.db";
     private static DBManager sInstance;

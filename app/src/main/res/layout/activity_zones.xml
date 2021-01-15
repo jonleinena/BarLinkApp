@@ -6,6 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".utils.activities.Zones">
 
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="132dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.6"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic__9fc3cad1fd3ac0809f78139f815268c" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/zone_recyclerview"
         android:layout_width="716dp"

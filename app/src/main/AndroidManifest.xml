@@ -4,7 +4,6 @@
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
-    <uses-feature android:name="android.hardware.type.watch" />
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
@@ -16,18 +15,6 @@
         android:screenOrientation="landscape"
         android:supportsRtl="true"
         android:theme="@style/Theme.Barlink">
-        <activity
-            android:name=".utils.activities.CommandActivity"
-            android:label="@string/title_activity_command">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
-
-
         <activity android:name=".utils.activities.Tables" />
         <activity android:name=".utils.activities.Zones" />
         <activity android:name=".utils.activities.MainActivity" />

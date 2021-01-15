@@ -53,8 +53,8 @@ public class Tables extends AppCompatActivity {
             @Override
             public void onItemClick(int position) {
                 table = tablesList.get(position);
-
-
+                getExtra();
+                openNextActivity();
             }
         });
 
@@ -74,9 +74,8 @@ public class Tables extends AppCompatActivity {
     /**
      * Method to open next activity
      *
-     * @param user user selected, needed to pass the active user's id for following activities.
      */
-    private void openNextActivity(User user) {
+    private void openNextActivity() {
         Intent intent = new Intent(this, CommandActivity.class);
         intent.putExtra("selectedUser", idUser);
         intent.putExtra("selectedZone", idZone);

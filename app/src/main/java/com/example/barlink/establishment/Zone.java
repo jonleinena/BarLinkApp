@@ -1,5 +1,7 @@
 package com.example.barlink.establishment;
 
+import com.example.barlink.command.User;
+import com.example.barlink.utils.sorting.I_Comparable;
 import com.google.android.material.transition.ScaleProvider;
 
 import java.util.ArrayList;
@@ -10,7 +12,7 @@ import java.util.ArrayList;
  * @author Jon Leiñena  - https://github.com/jonleinena
  * @author Mikel Ferrer - https://github.com/FerreMikel
  */
-public class Zone {
+public class Zone implements I_Comparable<Zone> {
 
     int idZone;
     String name;
@@ -62,5 +64,15 @@ public class Zone {
 
     public void setCapacity(int capacity) {
         this.capacity = capacity;
+    }
+
+    @Override
+    public boolean compareNum(Zone o) {
+        return this.idZone>o.getIdZone();
+    }
+
+    @Override
+    public boolean compareStr(Zone o) {
+        return (int)this.name.toLowerCase().charAt(0)>(int)o.getName().toLowerCase().charAt(0);
     }
 }

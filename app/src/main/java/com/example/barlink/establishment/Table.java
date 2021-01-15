@@ -1,5 +1,8 @@
 package com.example.barlink.establishment;
 
+import com.example.barlink.command.User;
+import com.example.barlink.utils.sorting.I_Comparable;
+
 /**
  * Represents a table
  *

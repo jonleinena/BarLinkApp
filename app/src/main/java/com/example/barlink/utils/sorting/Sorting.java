@@ -128,11 +128,11 @@ public class Sorting {
      * @param high Index of the last element
      * @param <E> Type of the elements in the array
      */
-    public static <E extends I_Comparable<E>> void quicksort(ArrayList<E> a, int low, int high) {
+    public static <E extends I_Comparable<E>> void quicksortStr(ArrayList<E> a, int low, int high) {
         if (low < high) {
             int pivotLocation = partition(a, low, high);
-            quicksort(a, low, pivotLocation);
-            quicksort(a, pivotLocation + 1, high);
+            quicksortStr(a, low, pivotLocation);
+            quicksortStr(a, pivotLocation + 1, high);
         }
     }
 

@@ -21,7 +21,6 @@ import com.example.barlink.command.User;
  */
 
 public class FirstAdapter extends RecyclerView.Adapter<FirstAdapter.ViewHolder> {
-
     private List<User> myList;
     private OnItemClickListener mListener;
 
